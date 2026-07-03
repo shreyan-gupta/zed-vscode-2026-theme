@@ -1,0 +1,7 @@
+id = "vscode-2026"
+name = "VSCode 2026"
+schema_version = 1
+version = "0.1.0"
+authors = ["shreyan-gupta"]
+description = "A faithful port of VS Code's default Dark 2026 and Light 2026 themes."
+repository = "https://github.com/shreyan-gupta/zed-vscode-2026-theme"
