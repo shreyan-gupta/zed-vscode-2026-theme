@@ -62,24 +62,34 @@ does), add this for the languages you use:
 
 Leave it out and the theme still looks great.
 
-### Match VS Code's Rust coloring (advanced)
+### Match VS Code's semantic coloring (advanced)
 
-VS Code applies a couple of Rust colors that Zed's defaults don't. To match
-them, add these rules to your `settings.json`:
+VS Code applies a few colors, driven by language-server semantic tokens, that
+Zed's defaults don't. To match them, enable `semantic_tokens` (see above) and
+add these rules to your `settings.json`:
 
 ```json
 {
   "global_lsp_settings": {
     "semantic_token_rules": [
       { "token_type": "keyword", "token_modifiers": ["controlFlow"], "style": ["keyword.control"] },
-      { "token_type": "derive", "style": ["type"] }
+      { "token_type": "derive", "style": ["type"] },
+      { "token_type": "enumMember", "style": ["variant"] },
+      { "token_type": "namespace", "style": ["namespace"] },
+      { "token_type": "selfKeyword", "style": ["keyword"] }
     ]
   }
 }
 ```
 
-- The first turns control-flow keywords (`if`, `match`, `return`, …) purple instead of coral.
-- The second turns derived trait names (`Debug`, `Clone`, …) inside `#[derive(...)]` teal instead of orange.
+- **controlFlow** turns control-flow keywords (`if`, `match`, `return`, …) purple instead of coral.
+- **derive** turns derived trait names (`Debug`, `Clone`, …) inside `#[derive(...)]` teal instead of orange.
+- **enumMember** colors enum members (`Color::Red`) blue at use sites, not just where they're declared.
+- **namespace** colors module/namespace paths teal.
+- **selfKeyword** colors `self` like a keyword.
+
+Each rule points at one of the theme's own colors (`style: [...]`) rather than a
+fixed hex, so it stays correct in both the dark and light variants.
 
 ## Known differences from VS Code
 
